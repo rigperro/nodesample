@@ -1,0 +1,19 @@
+version: "2"
+services:
+  backend:
+    image: nodebackend
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo:4.2.0
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "1048:27017"
